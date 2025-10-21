@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aşıgım Sana Sude 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png" type="image/png"> 
+</head>
+<body>
+    <div id="loading-screen">
+        <img id="flicker-image" src="photos/flicker_img.jpg" alt="Birlikteki anımız">
+        <div class="loading-text">Yükleniyor...</div>
+    </div>
+
+    <div id="content" class="hidden">
+        <div id="main-background"></div> <div class="overlay"></div>
+        
+        <div id="photo-gallery">
+            <img class="thumbnail" src="photos/thumb1.jpg" data-bg="photos/thumb1.jpg" alt="Anı 1">
+            <img class="thumbnail" src="photos/thumb2.jpg" data-bg="photos/thumb2.jpg" alt="Anı 2">
+            <img class="thumbnail" src="photos/thumb3.jpg" data-bg="photos/thumb3.jpg" alt="Anı 3">
+            <img class="thumbnail" src="photos/thumb4.jpg" data-bg="photos/thumb4.jpg" alt="Anı 4">
+            <img class="thumbnail" src="photos/thumb5.jpg" data-bg="photos/thumb5.jpg" alt="Anı 5">
+            <img class="thumbnail" src="photos/thumb6.jpg" data-bg="photos/thumb6.jpg" alt="Anı 6">
+            <img class="thumbnail" src="photos/thumb7.jpg" data-bg="photos/thumb7.jpg" alt="Anı 7">
+        </div>
+
+        <div class="container">
+            <h1 id="countdown-title">Birlikteliğimizin</h1>
+            <div id="countdown">
+                <span class="value" id="days">0</span><span class="unit">Gün</span>
+                <span class="value" id="hours">0</span><span class="unit">Saat</span>
+                <span class="value" id="minutes">0</span><span class="unit">Dakika</span>
+                <span class="value" id="seconds">0</span><span class="unit">Saniye</span>
+            </div>
+            <p id="special-message">"Seni çooook seviyorum güzelim benim."</p>
+            <p class="signature">- Burhan YILMAZ</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
