@@ -4,19 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aşıgım Sana Sude 💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Fontlar -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- İkonlar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Dosyası Bağlantısı -->
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.png" type="image/png"> 
 </head>
 <body>
-    <div id="loading-screen">
-        <img id="flicker-image" src="photos/flicker_img.jpg" alt="Birlikteki anımız">
-        <div class="loading-text">Yükleniyor...</div>
+
+    <!-- Müzik Dosyası (Klasöründe 'music.mp3' olduğundan emin ol) -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+        Tarayıcınız ses elementini desteklemiyor.
+    </audio>
+
+    <!-- Müzik Kontrol Butonu (Sağ Alt) -->
+    <div id="music-control">
+        <i id="music-icon" class="fas fa-music"></i>
     </div>
 
+    <!-- YENİ EKLENEN: Kariyer Butonu (Sol Alt) -->
+    <!-- 'photos/thumb1.jpg' yerine kendi istediğin fotoğrafın yolunu yaz -->
+    <a href="career.html" id="career-btn" title="Kariyer Sayfasına Git">
+        <img src="photos/hul1.jpg" alt="Kariyer">
+    </a>
+    
+
+    <!-- Loading Ekranı -->
+    <div id="loading-screen">
+        <img id="flicker-image" src="photos/flicker_img.jpg" alt="Birlikteki anımız">
+        <div class="loading-text">Anılarımız Yükleniyor...</div>
+    </div>
+
+    <!-- Ana İçerik -->
     <div id="content" class="hidden">
-        <div id="main-background"></div> <div class="overlay"></div>
+        <div id="main-background"></div> 
+        <div class="overlay"></div>
         
+        <!-- Galeri -->
         <div id="photo-gallery">
             <img class="thumbnail" src="photos/thumb1.jpg" data-bg="photos/thumb1.jpg" alt="Anı 1">
             <img class="thumbnail" src="photos/thumb2.jpg" data-bg="photos/thumb2.jpg" alt="Anı 2">
@@ -25,21 +52,50 @@
             <img class="thumbnail" src="photos/thumb5.jpg" data-bg="photos/thumb5.jpg" alt="Anı 5">
             <img class="thumbnail" src="photos/thumb6.jpg" data-bg="photos/thumb6.jpg" alt="Anı 6">
             <img class="thumbnail" src="photos/thumb7.jpg" data-bg="photos/thumb7.jpg" alt="Anı 7">
+            <img class="thumbnail" src="photos/thumb8.jpg" data-bg="photos/thumb8.jpg" alt="Anı 8">
+            <img class="thumbnail" src="photos/thumb9.jpg" data-bg="photos/thumb9.jpg" alt="Anı 9">
+            <img class="thumbnail" src="photos/thumb10.jpg" data-bg="photos/thumb10.jpg" alt="Anı 10">
+
         </div>
 
         <div class="container">
-            <h1 id="countdown-title">Birlikteliğimizin</h1>
+            <h1 id="countdown-title">Beraberliğimizin</h1>
+            
+            <!-- Sayaç -->
             <div id="countdown">
-                <span class="value" id="days">0</span><span class="unit">Gün</span>
-                <span class="value" id="hours">0</span><span class="unit">Saat</span>
-                <span class="value" id="minutes">0</span><span class="unit">Dakika</span>
-                <span class="value" id="seconds">0</span><span class="unit">Saniye</span>
+                <div class="time-box"><span class="value" id="days">0</span><span class="unit">Gün</span></div>
+                <div class="time-box"><span class="value" id="hours">00</span><span class="unit">Saat</span></div>
+                <div class="time-box"><span class="value" id="minutes">00</span><span class="unit">Dakika</span></div>
+                <div class="time-box"><span class="value" id="seconds">00</span><span class="unit">Saniye</span></div>
             </div>
+            
             <p id="special-message">"Seni çooook seviyorum güzelim benim."</p>
+            
+            <!-- Aşk Sözleri -->
+            <div id="love-card-container">
+                <button id="love-btn">Neden Seni Seviyorum? 💖</button>
+                <p id="random-love-note"></p>
+            </div>
+
             <p class="signature">- Burhan YILMAZ</p>
+
+            <!-- Ziyaretçi Defteri -->
+            <div id="guestbook-section">
+                <h3>💌 Sude'ye Not Bırak</h3>
+                <div class="guestbook-form">
+                    <input type="text" id="guest-name" placeholder="Adın (Zorunlu)" maxlength="20">
+                    <textarea id="guest-msg" placeholder="Buraya güzel bir not yaz..." maxlength="150"></textarea>
+                    <button id="send-msg-btn">Gönder</button>
+                </div>
+                <div id="messages-list">
+                    <div class="loading-msgs">Mesajlar yükleniyor...</div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Firebase SDK -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>

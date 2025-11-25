@@ -1,3 +1,4 @@
+/* --- TEMEL AYARLAR --- */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -6,11 +7,79 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: #000;
-    overflow: hidden; 
+    overflow-y: auto; /* İçerik uzarsa scroll çıksın */
+    overflow-x: hidden;
     color: #fff;
 }
 
-/* --- Loading Ekranı --- */
+/* --- MÜZİK ÇALAR BUTONU (SAĞ ALT) --- */
+#music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulse-soft 2s infinite;
+}
+
+#music-control:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+#music-icon {
+    font-size: 24px;
+    color: #FFEDB0;
+}
+
+@keyframes pulse-soft {
+    0% { box-shadow: 0 0 0 0 rgba(255, 237, 176, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 237, 176, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 237, 176, 0); }
+}
+
+/* --- YENİ EKLENEN: KARİYER BUTONU (SOL ALT) --- */
+#career-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* Sol köşe ayarı */
+    z-index: 100;
+    width: 60px; /* Fotoğraf net görünsün diye biraz daha büyük */
+    height: 60px;
+    border-radius: 50%; /* Tam yuvarlak */
+    overflow: hidden; /* Resmin taşmasını engeller */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Şık bir çerçeve */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Parlama efekti */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulse-soft 2s infinite; /* Müzik butonuyla aynı nefes alma efekti */
+}
+
+#career-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Resmi butona sığdırır ve kırpar */
+    display: block;
+}
+
+#career-btn:hover {
+    transform: scale(1.1) rotate(10deg); /* Üzerine gelince büyüme ve hafif dönme */
+    border-color: #FFEDB0; /* Çerçeve rengi değişimi */
+    box-shadow: 0 0 25px rgba(255, 237, 176, 0.6); /* Parlama artışı */
+}
+
+
+/* --- LOADING EKRANI --- */
 #loading-screen {
     position: fixed;
     top: 0;
@@ -38,7 +107,7 @@ body {
     height: auto;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); 
-    animation: flicker 1.5s infinite alternate; /* Yanıp sönme animasyonu */
+    animation: flicker 1.5s infinite alternate;
 }
 
 @keyframes flicker {
@@ -52,6 +121,7 @@ body {
     font-size: 1.2em;
     color: #ccc;
     animation: pulse 1.5s infinite alternate;
+    font-family: 'Dancing Script', cursive;
 }
 
 @keyframes pulse {
@@ -59,16 +129,18 @@ body {
     100% { opacity: 1; }
 }
 
-/* --- Ana İçerik --- */
+/* --- ANA İÇERİK --- */
 #content {
-    position: fixed;
+    position: absolute; /* Fixed yerine absolute yaptık ki sayfa aşağı uzayabilsin */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; /* Dikey ortalamayı kaldırabiliriz içerik çoksa */
+    padding-top: 80px; /* Galeri için boşluk */
+    padding-bottom: 50px;
     text-align: center;
     transition: opacity 1s ease-in;
 }
@@ -78,9 +150,8 @@ body {
     pointer-events: none;
 }
 
-/* Dinamik Arka Plan */
 #main-background {
-    position: absolute;
+    position: fixed; /* Arka plan sabit kalsın */
     top: 0;
     left: 0;
     width: 100%;
@@ -88,64 +159,73 @@ body {
     background-size: cover;
     background-position: center;
     transition: background-image 0.5s ease-in-out; 
+    z-index: -2;
 }
 
 .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: -1;
 }
 
 .container {
     position: relative;
     z-index: 2;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-    max-width: 90%;
+    max-width: 600px;
+    width: 90%;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-top: 50px; /* Galeri ile çakışmaması için */
 }
 
-/* --- Fotoğraf Galerisi --- */
+/* --- GALERİ --- */
 #photo-gallery {
-    position: absolute;
+    position: fixed; /* Galeri üstte sabit kalsın */
     top: 15px; 
     left: 50%;
     transform: translateX(-50%);
-    z-index: 3;
+    z-index: 10;
     display: flex;
-    gap: 8px; /* Resimler arası boşluk */
+    gap: 8px;
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    max-width: 95%; /* Mobil sığdırma */
-    overflow-x: auto; /* Yatay kaydırmaya izin ver */
+    max-width: 95%; 
+    overflow-x: auto; 
     white-space: nowrap;
+    backdrop-filter: blur(3px);
 }
+#photo-gallery::-webkit-scrollbar { display: none; }
 
 .thumbnail {
-    width: 45px; 
+    width: 45px;
     height: 45px;
     object-fit: cover;
     flex-shrink: 0; 
     border-radius: 5px;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     cursor: pointer;
     transition: border-color 0.2s, transform 0.2s;
 }
 
 .thumbnail:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
+    border-color: #FFEDB0;
 }
 
-/* --- Sayaç ve Yazı Stilleri --- */
+/* --- SAYAÇ --- */
 #countdown-title {
-    font-size: 1.8em;
-    margin-bottom: 10px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2em;
+    margin-bottom: 15px;
     color: #FFDDC1;
 }
 
@@ -157,8 +237,14 @@ body {
     flex-wrap: wrap; 
 }
 
+.time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #countdown .value {
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: bold;
     color: #FFEDB0;
     display: block;
@@ -167,23 +253,153 @@ body {
 }
 
 #countdown .unit {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: #F8F8F8;
-    display: block;
     margin-top: 5px;
 }
 
 #special-message {
     font-family: 'Dancing Script', cursive; 
-    font-size: 1.5em;
+    font-size: 1.6em;
     font-style: italic;
     color: #E0BBE4; 
-    margin-bottom: 20px;
-    padding: 0 10px;
+    margin-bottom: 15px;
 }
 
 .signature {
-    font-size: 1em;
-    color: #F8F8F8;
+    font-size: 0.9em;
+    color: #aaa;
     margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+/* --- AŞK KARTI --- */
+#love-card-container {
+    margin: 20px 0;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+#love-btn {
+    background-color: rgba(224, 187, 228, 0.2);
+    color: #FFEDB0;
+    border: 1px solid #FFEDB0;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#love-btn:hover {
+    background-color: #FFEDB0;
+    color: #000;
+}
+
+#random-love-note {
+    margin-top: 10px;
+    font-size: 1em;
+    font-style: italic;
+    min-height: 1.5em;
+}
+
+/* --- ZİYARETÇİ DEFTERİ --- */
+#guestbook-section {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#guestbook-section h3 {
+    text-align: center;
+    color: #FFDDC1;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.guestbook-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.guestbook-form input, 
+.guestbook-form textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+}
+
+.guestbook-form textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.guestbook-form input::placeholder, 
+.guestbook-form textarea::placeholder {
+    color: #aaa;
+}
+
+#send-msg-btn {
+    background-color: #E0BBE4;
+    color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#send-msg-btn:hover {
+    background-color: #FFDDC1;
+}
+
+#messages-list {
+    max-height: 200px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+}
+#messages-list::-webkit-scrollbar { width: 5px; }
+#messages-list::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
+
+.msg-item {
+    background: rgba(255,255,255,0.05);
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+.msg-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    color: #FFEDB0;
+    margin-bottom: 4px;
+}
+.msg-content {
+    color: #eee;
+    word-wrap: break-word;
+}
+
+/* --- KALP YAĞMURU --- */
+.heart {
+    position: fixed;
+    top: -10vh;
+    color: #e00;
+    font-size: 20px;
+    z-index: 0;
+    animation: fall linear forwards;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); }
 }
