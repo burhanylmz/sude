@@ -76,21 +76,23 @@
         }
         .nav-links a:hover { color: var(--gold); }
 
-        /* MOBİL İÇİN GERİ DÖN BUTONU (Masaüstünde Gizli) */
+        /* MOBİL İÇİN GERİ DÖN BUTONU (Masaüstünde Gizli, Nav İçinde) */
         .mobile-back-btn {
             display: none; /* Masaüstünde görünmez */
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
             background: rgba(0, 0, 0, 0.6);
             color: var(--gold);
             border: 1px solid var(--gold);
             padding: 8px 15px;
             border-radius: 20px;
             text-decoration: none;
-            font-size: 0.9rem;
-            backdrop-filter: blur(5px);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .mobile-back-btn:active {
+            background: var(--gold);
+            color: var(--black);
         }
 
         /* --- HERO SECTION --- */
@@ -378,7 +380,8 @@
         /* --- ÖNEMLİ: MOBİL UYUMLULUK AYARLARI --- */
         @media (max-width: 768px) {
             /* Navbar Düzenlemesi */
-            nav { padding: 15px 20px; background: rgba(0,0,0,0.95); justify-content: flex-start; }
+            /* Justify-content: space-between yaparak Logoyu sola, Butonu sağa alıyoruz */
+            nav { padding: 15px 20px; background: rgba(0,0,0,0.95); justify-content: space-between; }
             .nav-links { display: none; } /* Mobilde menüyü gizle */
             .logo { font-size: 1.2rem; }
 
@@ -464,12 +467,12 @@
             <a href="#network">Network</a>
             <a href="index.html" style="border: 1px solid #fff; padding: 5px 15px;">Aşka Dön 💖</a>
         </div>
+        
+        <!-- MOBİL İÇİN GERİ DÖN BUTONU (Nav içine taşıdık) -->
+        <a href="index.html" class="mobile-back-btn">
+            <i class="fas fa-heart"></i> Aşka Dön
+        </a>
     </nav>
-
-    <!-- MOBİL İÇİN GERİ DÖN BUTONU (Sağ Üstte Sabit) -->
-    <a href="index.html" class="mobile-back-btn">
-        <i class="fas fa-heart"></i> Aşka Dön
-    </a>
 
     <!-- Hero Bölümü -->
     <header>
@@ -555,7 +558,7 @@
     <!-- Beyaz Bölüm (Quote) - WORK FOTOSU BURADA -->
     <div class="quote-section">
         <div class="quote-text">
-            "Hayat bir podyumdur, iş dünyası ise bir satranç tahtası. İkisinde de hamlelerinizi zarafetle yapmalısınız."
+            "Sezarın Hakkını Sezara Vericeksin."
         </div>
         <div class="quote-author">- Hülya Balkan</div>
     </div>
@@ -583,7 +586,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 Hülya Balkan. Tüm Hakları Saklıdır.</p>
+        <p>&copy; 2024 Hülya Balkan. Tüm Hakları Saklıdır.</p>
         <p style="font-size: 0.7rem; color: #444; margin-top: 10px;">Designed with respect by Burhan Yılmaz</p>
     </footer>
 
